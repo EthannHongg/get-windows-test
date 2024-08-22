@@ -1,5 +1,5 @@
 import express from "express";
-import { openWindows } from "get-windows";
+import { activeWindow, openWindows, openWindowsSync } from "get-windows";
 import { WebSocketServer } from "ws";
 
 const app = express();
@@ -14,7 +14,7 @@ wss.on("connection", (ws) => {
   const sendWindowData = async () => {
     try {
       let start = performance.now();
-      const windows = await openWindows();
+      const windows = openWindowsSync();
       let end = performance.now();
       console.log("openWindows() method await time: ", end - start);
       console.log("windows", windows);
